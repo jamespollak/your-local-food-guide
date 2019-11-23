@@ -1,22 +1,153 @@
 .App {
   text-align: center;
+  margin: 100px 0;
 }
 
 .App-logo {
-  height: 40vmin;
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.beer-image {
+  width: 5%;
+}
+
+nav {
+  background-color: white;
+  width: 100vw;
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: black;
+}
+
+.navItem {
+  margin: auto 20px;
+  text-decoration: none;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+  margin-top: auto;
+  background-color: white;
+  width: 100vw;
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-style: solid;
+  border-top-width: 0.5px;
+  border-top-color: black;
+}
+
+.footerItem {
+  margin: auto 20px;
+  text-decoration: none;
+  font-size: small;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.signup {
+  background: #fff;
+  padding: 4em 4em 2em;
+  max-width: 400px;
+  border-radius: 2px;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  display: block;
+  margin: auto;
+}
+.signup p {
+  margin: auto;
+  padding: 15px;
+  text-align: center;
+  font-size: 30px;
+  color: darken(#e5e5e5, 50%);
+  border-bottom: solid 1px #e5e5e5;
+}
+.signup input {
+  padding: 15px;
+  display: block;
+  box-sizing: border-box;
+  width: 70%;
+  outline: none;
+  text-align: center;
+  margin: 30px auto;
+}
+
+.login {
+  background: #fff;
+  padding: 4em 4em 2em;
+  max-width: 400px;
+  border-radius: 2px;
+  width: 50%;
+  justify-content: center;
+  display: block;
+  margin: auto;
+}
+.login p {
+  margin: auto;
+  padding: 15px;
+  text-align: center;
+  font-size: 30px;
+  color: darken(#e5e5e5, 50%);
+  border-bottom: solid 1px #e5e5e5;
+}
+.login input {
+  padding: 15px;
+  display: block;
+  margin: 30px auto;
+  box-sizing: border-box;
+  width: 70%;
+  outline: none;
+  text-align: center;
+}
+
+.submit {
+  padding: 15px;
+  display: block;
+  margin: 30px auto;
+  box-sizing: border-box;
+  width: 70%;
+  outline: none;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

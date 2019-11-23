@@ -1,13 +1,44 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const app = express();
 
-var app = express();
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+require("dotenv").config();
+
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
+  .then(() => {
+    console.log("connected!");
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+
+app.use(
+  session({
+    secret: "secret squirell",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true
+  })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -19,8 +50,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+const authRouter = require("./routes/authRoutes");
+app.use("/api/auth", authRouter);
+
+const uploadRoute = require("./routes/uploadRoute");
+const protectedRoute = require("./routes/protectedRoute");
+app.use("/api/upload", protectedRoute, uploadRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
