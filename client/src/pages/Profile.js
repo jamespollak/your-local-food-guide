@@ -30,27 +30,6 @@ export default class Profile extends Component {
     return (
       <div>
         <h1>Welcome {this.props.user.username}!</h1>
-
-        <form
-          onSubmit={this.submitHandler}
-          ref={this.form}
-          encType="multipart/form-data"
-        >
-          <input
-            type="file"
-            name="profile-photo"
-            placeholder="upload your profile"
-          />
-          <input type="text" placeholder="Add a caption!" name="caption" />
-          <button type="submit">Upload photo</button>
-          {this.state.err && <p>{this.state.err}</p>}
-        </form>
-        {this.props.user.profilePhoto && (
-          <div>
-            <h1>{this.props.user.profilePhoto.caption}</h1>
-            <img src={this.props.user.profilePhoto.imageUrl} alt="" />
-          </div>
-        )}
       </div>
     );
   }

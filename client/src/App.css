@@ -143,6 +143,10 @@ footer {
   color: white;
 }
 
+.logo {
+  width: 2%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

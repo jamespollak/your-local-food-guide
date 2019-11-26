@@ -1,23 +1,44 @@
 import React, { Component } from "react";
+import chefLogo from "../images/chef.png";
+import AuthService from "../api/authService";
+import { Link } from "react-router-dom";
+
+//what is condition
+// and how to make navbar aware of it.
 
 class NavBar extends Component {
   render() {
-    return (
-      <nav>
-        <a className="navItem" href="/">
-          <img src="../public/chef.png" />
-        </a>
-        <a className="navItem" href="/">
-          Home
-        </a>
-        <a className="navItem" href="/signup">
-          Sign Up
-        </a>
-        <a className="navItem" href="/login">
-          Login
-        </a>
-      </nav>
-    );
+    if (!this.props.user) {
+      return (
+        <nav>
+          <img className="navItem" src={chefLogo} width="2%" />
+          <Link className="navItem" to="/">
+            Home
+          </Link>
+          <Link className="navItem" to="/signup">
+            Sign Up
+          </Link>
+          <Link className="navItem" to="/login">
+            Login
+          </Link>
+        </nav>
+      );
+    } else {
+      return (
+        <nav>
+          <img className="navItem" src={chefLogo} width="2%" />
+          <Link className="navItem" to="/">
+            Home
+          </Link>
+          <Link className="navItem" to="/profile">
+            {this.props.user.username}
+          </Link>
+          <Link className="navItem" onClick={this.props.logout}>
+            Logout
+          </Link>
+        </nav>
+      );
+    }
   }
 }
 
