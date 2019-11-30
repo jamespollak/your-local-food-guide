@@ -11,7 +11,6 @@ const api = axios.create({
 });
 
 const getRestaurants = userLocation => {
-  debugger;
   return api
     .get("/businesses/search", {
       params: {
@@ -21,8 +20,6 @@ const getRestaurants = userLocation => {
       }
     })
     .then(res => {
-      debugger;
-
       res.data.businesses.map(business => {
         return {
           name: business.name,
@@ -31,7 +28,6 @@ const getRestaurants = userLocation => {
       });
     })
     .catch(error => {
-      debugger;
       console.error(error);
     });
 };

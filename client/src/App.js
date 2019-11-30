@@ -33,16 +33,13 @@ export default class App extends Component {
         longitude: result.coords.longitude
       };
       const restaurants = await YelpService.getRestaurants(location);
-      debugger;
     });
   };
 
   getRestaurants = async () => {
     const { latitude, longitude } = this.state.region;
     const userLocation = { latitude, longitude };
-    debugger;
     const restaurants = await YelpService.getRestaurants(userLocation);
-    debugger;
     this.setState({ restaurants });
   };
 
@@ -53,21 +50,22 @@ export default class App extends Component {
 
     try {
       //Making the actual API call.
-      //   user = await this.authService.isLoggedIn();
+      user = await this.authService.isLoggedIn();
       this.getUserLocation();
     } catch (err) {
       user = null;
     } finally {
-      console.log(location);
       //Irregardless of the result we want to set state.
-      // this.setUserState({ user, location });
+      this.setUserState(user, location);
     }
   }
 
-  setUserState = user => {
+  setUserState = (user, location) => {
     // If user is loggedIn state will be set with user,
     // otherwise user will be null.
-    this.setState({ user, isLoadingUser: false, err: null });
+    const setLocation = this.state.location ? this.state.location : location;
+
+    this.setState({ user, setLocation, isLoadingUser: false, err: null });
   };
 
   logout = async () => {
@@ -83,6 +81,7 @@ export default class App extends Component {
 
   render() {
     const { region, restaurants } = this.state;
+    console.log("STATE", this.state);
     // Initially we do not know yet whether an user is logged in or not so we just return a loader.
     if (this.state.isLoadingUser)
       return <Loader className="full-screen-loader" />;
@@ -98,7 +97,7 @@ export default class App extends Component {
                 {...props}
                 setUserState={this.setUserState}
                 region={region}
-                places={this.state.restaurants}
+                places={restaurants}
               />
             )}
           />

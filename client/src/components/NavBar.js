@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import chefLogo from "../images/chef.png";
-import AuthService from "../api/authService";
 import { Link } from "react-router-dom";
 
 //what is condition
@@ -11,7 +10,7 @@ class NavBar extends Component {
     if (!this.props.user) {
       return (
         <nav>
-          <img className="navItem" src={chefLogo} width="2%" />
+          <img className="navItem" src={chefLogo} width="2%" alt="" />
           <Link className="navItem" to="/">
             Home
           </Link>
@@ -26,14 +25,14 @@ class NavBar extends Component {
     } else {
       return (
         <nav>
-          <img className="navItem" src={chefLogo} width="2%" />
+          <img className="navItem" src={chefLogo} width="2%" alt="" />
           <Link className="navItem" to="/">
             Home
           </Link>
           <Link className="navItem" to="/profile">
             {this.props.user.username}
           </Link>
-          <Link className="navItem" onClick={this.props.logout}>
+          <Link className="navItem" onClick={this.props.logout} to="/">
             Logout
           </Link>
         </nav>

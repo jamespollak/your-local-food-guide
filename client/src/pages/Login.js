@@ -32,7 +32,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div class="login">
+      <div className="login">
         <p>Hungry to find more of your favorite food? Login now!</p>
         <form onSubmit={this.submitHandler}>
           <input
@@ -47,7 +47,7 @@ export default class Login extends Component {
             name="password"
             placeholder="Your password"
           />
-          <button class="submit" type="submit">
+          <button className="submit" type="submit">
             Login!
           </button>
         </form>

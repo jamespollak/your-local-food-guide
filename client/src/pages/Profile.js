@@ -27,6 +27,7 @@ export default class Profile extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h1>Welcome {this.props.user.username}!</h1>
