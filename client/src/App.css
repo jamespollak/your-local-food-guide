@@ -147,6 +147,13 @@ footer {
   width: 2%;
 }
 
+.mapStyle {
+  width: 100%;
+  justify-content: center;
+  display: block;
+  margin: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

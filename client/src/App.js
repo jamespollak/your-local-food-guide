@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import Map from "./components/Map";
 import HigherOrder from "./pages/HigherOrder";
 
 export default class App extends Component {
@@ -60,6 +61,13 @@ export default class App extends Component {
       <div className="App">
         <NavBar user={this.state.user} logout={this.logout} />
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <Map {...props} setUserState={this.setUserState} />
+            )}
+          />
           <Route
             path="/login"
             render={props => (
