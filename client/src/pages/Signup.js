@@ -54,7 +54,7 @@ export default class Signup extends Component {
             name="email"
             placeholder="Email address"
           />
-          <button class="submit" type="submit">
+          <button className="submit" type="submit">
             Sign Up
           </button>
         </form>

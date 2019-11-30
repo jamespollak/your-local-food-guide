@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Map from "./components/Map";
+import YelpService from "./api/yelp";
 import HigherOrder from "./pages/HigherOrder";
 
 export default class App extends Component {
@@ -17,24 +18,51 @@ export default class App extends Component {
     super();
     this.state = {
       user: null,
-      isLoadingUser: true
+      isLoadingUser: true,
+      region: null,
+      restaurants: []
     };
     this.authService = new AuthService();
   }
 
+  getUserLocation = async () => {
+    let location;
+    await navigator.geolocation.getCurrentPosition(async result => {
+      location = {
+        latitude: result.coords.latitude,
+        longitude: result.coords.longitude
+      };
+      const restaurants = await YelpService.getRestaurants(location);
+      debugger;
+    });
+  };
+
+  getRestaurants = async () => {
+    const { latitude, longitude } = this.state.region;
+    const userLocation = { latitude, longitude };
+    debugger;
+    const restaurants = await YelpService.getRestaurants(userLocation);
+    debugger;
+    this.setState({ restaurants });
+  };
+
   //Every time starts check if user session exists and retrieve user data.
-  componentDidMount = async () => {
+  async componentDidMount() {
     let user;
+    let location;
+
     try {
       //Making the actual API call.
-      user = await this.authService.isLoggedIn();
+      //   user = await this.authService.isLoggedIn();
+      this.getUserLocation();
     } catch (err) {
       user = null;
     } finally {
+      console.log(location);
       //Irregardless of the result we want to set state.
-      this.setUserState(user);
+      // this.setUserState({ user, location });
     }
-  };
+  }
 
   setUserState = user => {
     // If user is loggedIn state will be set with user,
@@ -54,6 +82,7 @@ export default class App extends Component {
   };
 
   render() {
+    const { region, restaurants } = this.state;
     // Initially we do not know yet whether an user is logged in or not so we just return a loader.
     if (this.state.isLoadingUser)
       return <Loader className="full-screen-loader" />;
@@ -65,7 +94,12 @@ export default class App extends Component {
             exact
             path="/"
             render={props => (
-              <Map {...props} setUserState={this.setUserState} />
+              <Map
+                {...props}
+                setUserState={this.setUserState}
+                region={region}
+                places={this.state.restaurants}
+              />
             )}
           />
           <Route
