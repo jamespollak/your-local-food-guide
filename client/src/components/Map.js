@@ -4,22 +4,39 @@ import ReactMapGL from "react-map-gl";
 class Map extends Component {
   state = {
     viewport: {
-      width: 1200,
-      height: 400,
-      latitude: 52.3667,
-      longitude: 4.8945,
-      zoom: 11,
-      mapboxToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
+      width: "50vw",
+      height: "100vh",
+      latitude: 51.5074,
+      longitude: 0.1278,
+      zoom: 1
     }
+  };
+  componentDidMount() {
+    this.setUserLocation();
+  }
+
+  setUserLocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      let newViewport = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        zoom: 13
+      };
+      this.setState({
+        viewport: { ...this.state.viewport, ...newViewport }
+      });
+    });
   };
 
   render() {
     return (
-      <ReactMapGL
-        className="mapStyle"
-        {...this.state.viewport}
-        onViewportChange={viewport => this.setState({ viewport })}
-      />
+      <div className="map">
+        <ReactMapGL
+          {...this.state.viewport}
+          className="mapStyle"
+          onViewportChange={viewport => this.setState({ viewport })}
+        ></ReactMapGL>
+      </div>
     );
   }
 }

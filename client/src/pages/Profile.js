@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Route, Component, createRef } from "react";
 import UploadService from "../api/uploadService";
 
 export default class Profile extends Component {

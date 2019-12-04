@@ -9,9 +9,10 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import Map from "./components/Map";
 import YelpService from "./api/yelp";
 import HigherOrder from "./pages/HigherOrder";
+import HomePage from "./pages/HomePage";
+import CityLandingPage from "./pages/CityLandingPage";
 
 export default class App extends Component {
   constructor() {
@@ -88,19 +89,12 @@ export default class App extends Component {
     return (
       <div className="App">
         <NavBar user={this.state.user} logout={this.logout} />
+
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <Map
-                {...props}
-                setUserState={this.setUserState}
-                region={region}
-                places={restaurants}
-              />
-            )}
-          />
+          <Route exact path="/" component={HomePage} />
+
+          <Route exact path="/city/:query" component={CityLandingPage} />
+
           <Route
             path="/login"
             render={props => (
