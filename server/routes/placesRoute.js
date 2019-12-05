@@ -10,12 +10,17 @@ router.post("/places", function(req, res, next) {
   if (!id) return next(new Error("No id"));
   const { _id } = req.session.user;
 
-  User.findByIdAndUpdate(userId, whatToUpdate, { new: true }).then(
-    updatedUser => {
-      //here send udpdates user to front end.
-      // res.status(200).json(updatedUser);
-    }
-  );
+  //todo if current approach doesn't work.
+
+  // the places array of objects that are straight up copies of yelp.
+  User.findByIdAndUpdate(
+    { _id },
+    { $push: { places: id } },
+    { new: true }
+  ).then(updatedUser => {
+    //here send udpdates user to front end.
+    res.status(200).json(updatedUser);
+  });
 });
 
 /* DELETE places. */

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { getRestaurantsByQuery } from "../api/yelp";
 import Business from "../components/Business";
-import addService from "../api/addService";
 
 export default class CityLandingPage extends Component {
   constructor() {
@@ -10,7 +9,6 @@ export default class CityLandingPage extends Component {
       businesses: [],
       amount: 50
     };
-    this.addService = new addService();
   }
 
   componentDidMount() {

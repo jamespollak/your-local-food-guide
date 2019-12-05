@@ -60,6 +60,9 @@ app.use("/api/upload", protectedRoute, uploadRoute);
 const placesRouter = require("./routes/placesRoute");
 app.use("/api/yelp", protectedRoute, placesRouter);
 
+const getFavouritePlaces = require("./routes/getFavouritePlaces");
+app.use("/api/getFavouritePlaces", protectedRoute, getFavouritePlaces);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
