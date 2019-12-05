@@ -57,8 +57,8 @@ const uploadRoute = require("./routes/uploadRoute");
 const protectedRoute = require("./routes/protectedRoute");
 app.use("/api/upload", protectedRoute, uploadRoute);
 
-const placesRouter = require(".routes/placesRoute");
-app.use("/api/yelp", placesRouter);
+const placesRouter = require("./routes/placesRoute");
+app.use("/api/yelp", protectedRoute, placesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

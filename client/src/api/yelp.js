@@ -32,10 +32,10 @@ const getRestaurants = userLocation => {
     });
 };
 
-export const getRestaurantsByQuery = query => {
+export const getRestaurantsByQuery = (query, limit = 30) => {
   return api.get("/businesses/search", {
     params: {
-      limit: 30,
+      limit: limit,
       categories: "restaurants",
       location: query
     }

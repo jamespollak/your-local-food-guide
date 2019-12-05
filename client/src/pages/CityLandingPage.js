@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import { getRestaurantsByQuery } from "../api/yelp";
 import Business from "../components/Business";
+import addService from "../api/addService";
 
 export default class CityLandingPage extends Component {
   constructor() {
     super();
     this.state = {
-      businesses: []
+      businesses: [],
+      amount: 50
     };
+    this.addService = new addService();
   }
 
   componentDidMount() {
-    getRestaurantsByQuery(this.props.match.params.query)
+    getRestaurantsByQuery(this.props.match.params.query, this.state.amount)
       .then(res => {
         this.setState({ businesses: res.data.businesses });
       })
@@ -24,9 +27,8 @@ export default class CityLandingPage extends Component {
     return (
       <div>
         <h1>Discover {this.props.match.params.query}</h1>
-        <h2>The restaurants</h2>
-        {this.state.businesses.map((beer, i) => (
-          <Business key={i} {...beer} />
+        {this.state.businesses.map((restaurant, i) => (
+          <Business key={i} {...restaurant} />
         ))}
       </div>
     );
@@ -39,3 +41,16 @@ export default class CityLandingPage extends Component {
 //     coords: business.coordinates
 //   };
 // });
+
+{
+  /* 
+        <div action="">
+          <h2>How many restaurants do you wanna see?</h2>
+          <input
+            type="text"
+            value={this.state.amountOfBussinesses}
+            name="amount"
+            onChange={e => this.setState({ [e.target.name]: e.target.value })}
+          />
+        </div> */
+}
