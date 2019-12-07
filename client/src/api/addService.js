@@ -8,8 +8,8 @@ export default class addService {
     });
   }
 
-  addBusiness = async payload => {
-    const { data } = await this.service.post("/places", payload);
+  addBusiness = async id => {
+    const { data } = await this.service.post("/places", { id });
     return data;
   };
 }

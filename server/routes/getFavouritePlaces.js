@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
     console.log(user);
     const allPlaces = user.places.map(async placeId => {
       try {
-        const { data } = await api.get(`/businesses/${placeId}`);
+        const { data } = await api.get(`/places/${placeId}`);
         return data;
       } catch (err) {
         console.log(err);

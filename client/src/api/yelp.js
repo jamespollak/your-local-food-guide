@@ -41,6 +41,14 @@ export const getRestaurantsByQuery = (query, limit = 30) => {
     }
   });
 };
+
+export const getMyPlaces = id => {
+  return api.get("/businesses/search/", {
+    params: {
+      id: id
+    }
+  });
+};
 // componentDidMount, get props.match.query.city
 
 export default {

@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 /* POST places. */
 router.post("/places", async (req, res, next) => {
-  const { id } = req.body;
+  const { id } = req.body.id;
   if (!id) {
     res.status(400).json({ message: "This ID does not exist" });
     return false;

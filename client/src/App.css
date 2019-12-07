@@ -36,7 +36,7 @@ nav {
   right: 0;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: black;
+  border-bottom-color: lightgray;
 }
 
 .navItem {
@@ -59,7 +59,7 @@ footer {
   right: 0;
   border-top-style: solid;
   border-top-width: 0.5px;
-  border-top-color: black;
+  border-top-color: lightgrey;
 }
 
 .footerItem {

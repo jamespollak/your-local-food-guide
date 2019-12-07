@@ -1,36 +1,35 @@
 import React, { Route, Component, createRef } from "react";
 import UploadService from "../api/uploadService";
+import Map from "../components/Map";
+import Business from "../components/Business";
+import { getMyPlaces } from "../api/yelp";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      err: null
+      places: []
     };
-    this.form = createRef();
-    this.uploadService = new UploadService();
   }
 
-  submitHandler = async e => {
-    e.preventDefault();
-    try {
-      const data = new FormData(this.form.current);
-      const user = await this.uploadService.uploadProfile(data);
-      this.props.setUserState(user);
-      this.setState({ err: null });
-    } catch (err) {
-      debugger;
-      let message = err.message;
-      if (err.response) message = err.response.data.message;
-      this.setState({ err: message });
-    }
-  };
+  componentDidMount() {
+    getMyPlaces(this.props.user.places[0])
+      .then(res => {
+        this.setState({ places: res.data.places });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   render() {
     console.log(this.props);
     return (
       <div>
-        <h1>Welcome {this.props.user.username}!</h1>
+        <h1>Welcome {this.props.user.username}</h1>
+        {this.state.places.map((restaurant, i) => (
+          <Business key={i} {...restaurant} />
+        ))}
       </div>
     );
   }
