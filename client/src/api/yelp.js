@@ -43,13 +43,8 @@ export const getRestaurantsByQuery = (query, limit = 30) => {
 };
 
 export const getMyPlaces = id => {
-  return api.get("/businesses/search/", {
-    params: {
-      id: id
-    }
-  });
+  return api.get("/businesses/" + id);
 };
-// componentDidMount, get props.match.query.city
 
 export default {
   getRestaurants

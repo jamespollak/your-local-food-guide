@@ -15,7 +15,7 @@ export default class Profile extends Component {
   componentDidMount() {
     getMyPlaces(this.props.user.places[0])
       .then(res => {
-        this.setState({ places: res.data.places });
+        this.setState({ places: res.id });
       })
       .catch(error => {
         console.error(error);
