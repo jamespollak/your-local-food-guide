@@ -58,7 +58,7 @@ const protectedRoute = require("./routes/protectedRoute");
 app.use("/api/upload", protectedRoute, uploadRoute);
 
 const placesRouter = require("./routes/placesRoute");
-app.use("/api/yelp", protectedRoute, placesRouter);
+app.use("/api", protectedRoute, placesRouter);
 
 const getFavouritePlaces = require("./routes/getFavouritePlaces");
 app.use("/api/getFavouritePlaces", protectedRoute, getFavouritePlaces);

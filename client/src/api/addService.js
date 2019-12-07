@@ -9,7 +9,7 @@ export default class addService {
   }
 
   addBusiness = async payload => {
-    const { data } = await this.service.post("/places/add", payload);
+    const { data } = await this.service.post("/places", payload);
     return data;
   };
 }

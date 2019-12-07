@@ -7,7 +7,8 @@ const placesSchema = new Schema({
   rating: Number,
   price: String,
   lat: Number,
-  lng: Number
+  lng: Number,
+  city: String
 });
 
 const Places = mongoose.model("Places", placesSchema);
