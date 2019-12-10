@@ -4,7 +4,8 @@ const User = require("../models/User");
 
 /* POST places. */
 router.post("/places", async (req, res, next) => {
-  const { id } = req.body.id;
+  const { id } = req.body;
+  console.log("testys", req.body);
   if (!id) {
     res.status(400).json({ message: "This ID does not exist" });
     return false;
@@ -17,6 +18,7 @@ router.post("/places", async (req, res, next) => {
       { new: true }
     );
     if (userUpdated) {
+      req.session.user = userUpdated;
       res.status(200).json(userUpdated);
     } else {
       res.status(400).json({ message: "Please ensure you're logged in" });

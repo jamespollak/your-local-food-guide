@@ -12,23 +12,38 @@ export default class Profile extends Component {
     };
   }
 
-  componentDidMount() {
-    getMyPlaces(this.props.user.places[0])
+  async componentDidMount() {
+    const allPlaces = this.props.user.places.map(async placeId => {
+      try {
+        const { data } = await getMyPlaces(placeId);
+        return data;
+      } catch (err) {
+        return null;
+      }
+    });
+    Promise.all(allPlaces)
       .then(res => {
-        this.setState({ places: res.id });
+        console.log(res);
+        debugger;
+
+        debugger;
+        this.setState({ places: res });
+
+        debugger;
       })
-      .catch(error => {
-        console.error(error);
+      .catch(err => {
+        console.log(err);
+        debugger;
       });
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state);
     return (
       <div>
         <h1>Welcome {this.props.user.username}</h1>
-        {this.state.places.map((restaurant, i) => (
-          <Business key={i} {...restaurant} />
+        {this.state.places.map((id, i) => (
+          <Business key={i} {...id} />
         ))}
       </div>
     );

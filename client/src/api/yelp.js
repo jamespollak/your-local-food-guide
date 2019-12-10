@@ -4,7 +4,7 @@ const YELP_API_KEY =
   "ETpD-WScgVpK-jsn29ZUxpHEVTM8mzHn3u2zISzVCzvuaBxK-Z5Qkfb7EjRllLLdXH0AJnbtpwQ0gqisdPTMrJtNf7vSKqr9jQxuGWzwmNlnjT6P15LpwKhVsFTiXXYx";
 
 const api = axios.create({
-  baseURL: `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3`,
+  baseURL: `https://api.yelp.com/v3`,
   headers: {
     Authorization: `Bearer ${YELP_API_KEY}`
   }
@@ -17,7 +17,8 @@ const getRestaurants = userLocation => {
         limit: 10,
         categories: "restaurants",
         ...userLocation
-      }
+      },
+      crossDomain: true
     })
     .then(res => {
       res.data.businesses.map(business => {
@@ -33,18 +34,25 @@ const getRestaurants = userLocation => {
 };
 
 export const getRestaurantsByQuery = (query, limit = 30) => {
-  return api.get("/businesses/search", {
+  return api.get("http://localhost:3001/yelpProxy/restaurantsPerCity", {
     params: {
-      limit: limit,
-      categories: "restaurants",
       location: query
     }
   });
 };
 
 export const getMyPlaces = id => {
-  return api.get("/businesses/" + id);
+  return axios.get("http://localhost:3001/yelpProxy/businesses/" + id);
 };
+
+// getMyPlaces("PG7ZC1CbMOflvOZ7Vj7bZQ")
+//   .then(res => {
+//     console.log(res);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+//${"https://cors-anywhere.herokuapp.com/"}
 
 export default {
   getRestaurants
