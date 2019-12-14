@@ -10,6 +10,10 @@ const api = axios.create({
   }
 });
 
+const yelpProxy = axios.create({
+  baseURL: process.env.REACT_APP_PROXY_URL
+});
+
 const getRestaurants = userLocation => {
   return api
     .get("/businesses/search", {
@@ -34,7 +38,7 @@ const getRestaurants = userLocation => {
 };
 
 export const getRestaurantsByQuery = (query, limit = 30) => {
-  return api.get("http://localhost:3001/yelpProxy/restaurantsPerCity", {
+  return yelpProxy.get("restaurantsPerCity", {
     params: {
       location: query
     }
@@ -42,7 +46,7 @@ export const getRestaurantsByQuery = (query, limit = 30) => {
 };
 
 export const getMyPlaces = id => {
-  return axios.get("http://localhost:3001/yelpProxy/businesses/" + id);
+  return yelpProxy.get("businesses/" + id);
 };
 
 // getMyPlaces("PG7ZC1CbMOflvOZ7Vj7bZQ")

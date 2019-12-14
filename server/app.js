@@ -62,7 +62,6 @@ app.use("/api", protectedRoute, placesRouter);
 
 const getFavouritePlaces = require("./routes/getFavouritePlaces");
 app.use("/api/getFavouritePlaces", protectedRoute, getFavouritePlaces);
-
 const yelpProxy = require("./routes/yelpProxy");
 app.use("/yelpProxy", yelpProxy);
 

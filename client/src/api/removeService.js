@@ -10,7 +10,7 @@ export default class removeService {
 
   removeBusiness = async id => {
     debugger;
-    const { data } = await this.service.delete("/places", { id });
+    const { data } = await this.service.delete(`/places/${id}`);
     return data;
   };
 }
