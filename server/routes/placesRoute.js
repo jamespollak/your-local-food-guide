@@ -32,14 +32,16 @@ router.post("/places", async (req, res, next) => {
 
 /* DELETE places. */
 router.delete("/places", function(req, res, next) {
-  res.render("places");
+  //id to remove is in req.body.id
+
+  res.status(200).json("hi");
 });
 
 /* GET places. */
 router.get("/places", function(req, res, next) {
   //
 
-  res.render("places");
+  res.status(200).json("req.body.id");
 });
 
 module.exports = router;

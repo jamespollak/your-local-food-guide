@@ -82,7 +82,7 @@ export default class App extends Component {
 
   render() {
     const { region, restaurants } = this.state;
-    console.log("STATE", this.state);
+    console.log("STATE", this.state.user);
     // Initially we do not know yet whether an user is logged in or not so we just return a loader.
     if (this.state.isLoadingUser)
       return <Loader className="full-screen-loader" />;
@@ -93,7 +93,13 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
 
-          <Route exact path="/city/:query" component={CityLandingPage} />
+          <Route
+            exact
+            path="/city/:query"
+            render={props => (
+              <CityLandingPage {...props} user={this.state.user} />
+            )}
+          />
 
           <Route
             path="/login"

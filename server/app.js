@@ -62,8 +62,8 @@ app.use("/api", protectedRoute, placesRouter);
 
 const getFavouritePlaces = require("./routes/getFavouritePlaces");
 app.use("/api/getFavouritePlaces", protectedRoute, getFavouritePlaces);
+
 const yelpProxy = require("./routes/yelpProxy");
-console.log("hi");
 app.use("/yelpProxy", yelpProxy);
 
 // catch 404 and forward to error handler

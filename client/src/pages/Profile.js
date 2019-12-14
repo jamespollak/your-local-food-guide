@@ -24,26 +24,19 @@ export default class Profile extends Component {
     Promise.all(allPlaces)
       .then(res => {
         console.log(res);
-        debugger;
-
-        debugger;
         this.setState({ places: res });
-
-        debugger;
       })
       .catch(err => {
         console.log(err);
-        debugger;
       });
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <h1>Welcome {this.props.user.username}</h1>
         {this.state.places.map((id, i) => (
-          <Business key={i} {...id} />
+          <Business key={i} {...id} user={this.props.user} />
         ))}
       </div>
     );

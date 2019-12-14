@@ -20,12 +20,25 @@ class Business extends Component {
       });
   };
 
+  removePlace = () => {
+    this.removeService
+      .removeBusiness(this.props.id)
+      .then(result => {})
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   /* 
     this.props.user.placesIds.includes(this.props.id) then do stuff
   */
   render() {
-    debugger;
-    console.log(this.props);
+    let showDeleteBtn = false;
+
+    if (this.props.user) {
+      showDeleteBtn = this.props.user.places.includes(this.props.id);
+    }
+
     if (!this.props.id) return null;
     return (
       <div className="business-layout">
@@ -35,20 +48,24 @@ class Business extends Component {
           {this.props.price} | {this.props.rating}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
-        <button
-          className="submit"
-          type="submit"
-          onClick={() => this.addPlace()}
-        >
-          Add to my food guide
-        </button>
-        <button
-          className="submit"
-          type="submit"
-          onClick={() => this.removeService.removeBusiness(this.props.id)}
-        >
-          Remove from my food guide
-        </button>
+        {!showDeleteBtn && (
+          <button
+            className="submit"
+            type="submit"
+            onClick={() => this.addPlace()}
+          >
+            Add to my food guide
+          </button>
+        )}
+        {showDeleteBtn && (
+          <button
+            className="submit"
+            type="submit"
+            onClick={() => this.removePlace()}
+          >
+            Remove from my food guide
+          </button>
+        )}
       </div>
     );
   }

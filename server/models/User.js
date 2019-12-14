@@ -6,6 +6,8 @@ const userSchema = new Schema({
   password: { type: String },
   email: String,
   places: Array,
+  following: Array,
+  followers: Array,
   profilePhoto: {
     caption: { type: String },
     imageUrl: { type: String }
