@@ -11,6 +11,14 @@ class Business extends Component {
     this.addService = new addService();
     this.removeService = new removeService();
   }
+  addPlace = () => {
+    this.addService
+      .addBusiness(this.props.id)
+      .then(result => {})
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   /* 
     this.props.user.placesIds.includes(this.props.id) then do stuff
@@ -30,7 +38,7 @@ class Business extends Component {
         <button
           className="submit"
           type="submit"
-          onClick={() => this.addService.addBusiness(this.props.id)}
+          onClick={() => this.addPlace()}
         >
           Add to my food guide
         </button>
