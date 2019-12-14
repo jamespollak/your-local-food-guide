@@ -14,6 +14,9 @@ class NavBar extends Component {
           <Link className="navItem" to="/">
             Home
           </Link>
+          <Link className="navItem" to="/foodies">
+            Find Foodies
+          </Link>
           <Link className="navItem" to="/signup">
             Sign Up
           </Link>
@@ -28,6 +31,9 @@ class NavBar extends Component {
           <img className="navItem" src={chefLogo} width="2%" alt="" />
           <Link className="navItem" to="/">
             Home
+          </Link>
+          <Link className="navItem" to="/foodies">
+            Find Foodies
           </Link>
           <Link className="navItem" to="/profile">
             {this.props.user.username}

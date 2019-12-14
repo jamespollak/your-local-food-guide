@@ -151,7 +151,20 @@ footer {
 }
 
 .business-layout {
-  display: inline-block;
+  display: block;
+  margin: 10px;
+}
+
+.business-image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  object-fit: scale-down;
+}
+
+.submit {
+  width: 180px;
 }
 
 @keyframes App-logo-spin {

@@ -1,20 +1,30 @@
 import React, { Component } from "react";
 import { getRestaurantsByQuery } from "../api/yelp";
 import Business from "../components/Business";
+import AuthService from "../api/authService";
 
 export default class CityLandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       businesses: [],
-      amount: 50
+      amount: 50,
+      user: null
     };
+    this.service = new AuthService();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let user;
+    try {
+      user = await this.service.isLoggedIn();
+    } catch (err) {
+      user = null;
+    }
+
     getRestaurantsByQuery(this.props.match.params.query, this.state.amount)
       .then(res => {
-        this.setState({ businesses: res.data.businesses });
+        this.setState({ businesses: res.data.businesses, user });
       })
       .catch(error => {
         console.error(error);
@@ -27,7 +37,7 @@ export default class CityLandingPage extends Component {
       <div>
         <h1>Discover {this.props.match.params.query}</h1>
         {this.state.businesses.map((restaurant, i) => (
-          <Business key={i} {...restaurant} user={this.props.user} />
+          <Business key={i} {...restaurant} user={this.state.user} />
         ))}
       </div>
     );

@@ -3,10 +3,16 @@ import addService from "../api/addService";
 import removeService from "../api/removeService";
 
 class Business extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    let btn = true;
+
+    if (props.user) {
+      btn = !props.user.places.includes(this.props.id);
+    }
     this.state = {
-      places: []
+      places: [],
+      showBtn: btn
     };
     this.addService = new addService();
     this.removeService = new removeService();
@@ -14,7 +20,10 @@ class Business extends Component {
   addPlace = () => {
     this.addService
       .addBusiness(this.props.id)
-      .then(result => {})
+      .then(result => {
+        //update user.places
+        this.setState({ showBtn: false });
+      })
       .catch(error => {
         console.error(error);
       });
@@ -23,7 +32,13 @@ class Business extends Component {
   removePlace = () => {
     this.removeService
       .removeBusiness(this.props.id)
-      .then(result => {})
+      .then(res => {
+        //update the state of App.
+        // this.setState({ places: res.places });
+        //state.user.places array will be different
+        this.setState({ showBtn: true });
+        this.props.removePlace(this.props.id);
+      })
       .catch(error => {
         console.error(error);
       });
@@ -33,12 +48,6 @@ class Business extends Component {
     this.props.user.placesIds.includes(this.props.id) then do stuff
   */
   render() {
-    let showDeleteBtn = false;
-
-    if (this.props.user) {
-      showDeleteBtn = this.props.user.places.includes(this.props.id);
-    }
-
     if (!this.props.id) return null;
     return (
       <div className="business-layout">
@@ -48,23 +57,38 @@ class Business extends Component {
           {this.props.price} | {this.props.rating}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
-        {!showDeleteBtn && (
-          <button
-            className="submit"
-            type="submit"
-            onClick={() => this.addPlace()}
-          >
-            Add to my food guide
-          </button>
+        {!this.props.user && (
+          <div>
+            <button
+              className="submit"
+              type="submit"
+              onClick={() => this.addPlace()}
+            >
+              Sign Up or Login to add this to your food guide
+            </button>
+          </div>
         )}
-        {showDeleteBtn && (
-          <button
-            className="submit"
-            type="submit"
-            onClick={() => this.removePlace()}
-          >
-            Remove from my food guide
-          </button>
+        {this.props.user && (
+          <div>
+            {this.state.showBtn && (
+              <button
+                className="submit"
+                type="submit"
+                onClick={() => this.addPlace()}
+              >
+                Add to my food guide
+              </button>
+            )}
+            {!this.state.showBtn && (
+              <button
+                className="submit"
+                type="submit"
+                onClick={() => this.removePlace()}
+              >
+                Remove from my food guide
+              </button>
+            )}
+          </div>
         )}
       </div>
     );
