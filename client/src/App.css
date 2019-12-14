@@ -151,7 +151,9 @@ footer {
 }
 
 .business-layout {
-  display: block;
+  display: inline-block;
+  border-style: solid;
+  border: black;
   margin: 10px;
 }
 

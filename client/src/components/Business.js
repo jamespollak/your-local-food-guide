@@ -64,7 +64,7 @@ class Business extends Component {
               type="submit"
               onClick={() => this.addPlace()}
             >
-              Sign Up or Login to add this to your food guide
+              Sign Up or Login | Add to your Food Guide
             </button>
           </div>
         )}
