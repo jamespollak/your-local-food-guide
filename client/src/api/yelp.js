@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// const YELP_API_KEY =
-//   "ETpD-WScgVpK-jsn29ZUxpHEVTM8mzHn3u2zISzVCzvuaBxK-Z5Qkfb7EjRllLLdXH0AJnbtpwQ0gqisdPTMrJtNf7vSKqr9jQxuGWzwmNlnjT6P15LpwKhVsFTiXXYx";
-
 const api = axios.create({
   baseURL: process.env.REACT_APP_YELP_URL,
   headers: {
