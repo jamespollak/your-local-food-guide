@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const saltRounds = 1; // cost factor for producing the hash
 
 router.post("/signup", async (req, res, next) => {
   const { username, password } = req.body;

@@ -34,7 +34,6 @@ router.delete("/places/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     const { _id } = req.session.user;
-    debugger;
     const userUpdated = await User.findByIdAndUpdate(
       { _id },
       { $pull: { places: id } },

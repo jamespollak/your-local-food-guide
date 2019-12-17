@@ -40,6 +40,10 @@ app.use(
   })
 );
 
+// In app.js make sure you serve static react files:
+
+app.use(express.static(path.join(__dirname, "build")));
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -64,6 +68,12 @@ const getFavouritePlaces = require("./routes/getFavouritePlaces");
 app.use("/api/getFavouritePlaces", protectedRoute, getFavouritePlaces);
 const yelpProxy = require("./routes/yelpProxy");
 app.use("/yelpProxy", yelpProxy);
+
+// After all your other routes add the following code to always serve your react app.
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
