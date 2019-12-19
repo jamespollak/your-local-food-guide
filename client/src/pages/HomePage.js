@@ -9,8 +9,8 @@ export default function({ history, ...props }) {
   };
   console.log(props);
   return (
-    <div>
-      <form onSubmit={onSubmitHandler} className="search">
+    <div className="search">
+      <form onSubmit={onSubmitHandler}>
         <h2 className="title">YOUR GLOBAL LOCAL FOOD GUIDE</h2>
         <input
           type="text"

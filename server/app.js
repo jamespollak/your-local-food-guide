@@ -61,6 +61,9 @@ const uploadRoute = require("./routes/uploadRoute");
 const protectedRoute = require("./routes/protectedRoute");
 app.use("/api/upload", protectedRoute, uploadRoute);
 
+const usersRouter = require("./routes/usersRoute");
+app.use("/api/users", usersRouter);
+
 const placesRouter = require("./routes/placesRoute");
 app.use("/api", protectedRoute, placesRouter);
 

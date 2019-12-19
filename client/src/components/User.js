@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import addService from "../api/addService";
 import removeService from "../api/removeService";
+import { Link } from "react-router-dom";
 
-class Business extends Component {
+class User extends Component {
   constructor(props) {
     super(props);
     let btn = true;
 
     if (props.user) {
-      btn = !props.user.places.includes(this.props.id);
+      btn = !props.user.includes(this.props.id);
     }
     this.state = {
       places: [],
@@ -17,9 +18,9 @@ class Business extends Component {
     this.addService = new addService();
     this.removeService = new removeService();
   }
-  addPlace = () => {
+  addUser = () => {
     this.addService
-      .addBusiness(this.props.id)
+      .addUsers(this.props.id)
       .then(result => {
         //update user.places
         this.setState({ showBtn: false });
@@ -29,15 +30,15 @@ class Business extends Component {
       });
   };
 
-  removePlace = () => {
+  removeUser = () => {
     this.removeService
-      .removeBusiness(this.props.id)
+      .removeUsers(this.props.id)
       .then(res => {
         //update the state of App.
         // this.setState({ places: res.places });
         //state.user.places array will be different
         this.setState({ showBtn: true });
-        this.props.removePlace(this.props.id);
+        this.props.removeUser(this.props.id);
       })
       .catch(error => {
         console.error(error);
@@ -48,45 +49,31 @@ class Business extends Component {
     this.props.user.placesIds.includes(this.props.id) then do stuff
   */
   render() {
-    if (!this.props.id) return null;
+    console.log(this.props);
     return (
-      <div className="business-layout">
-        <h2>{this.props.name}</h2>
-        <h4>
-          {this.props.categories && this.props.categories[0].title} |{" "}
-          {this.props.price} | {this.props.rating}
-          {this.props.city}
-        </h4>
-        <img className="business-image" src={this.props.image_url} alt="" />
-        {!this.props.user && (
-          <div>
-            <button
-              className="submit"
-              type="submit"
-              onClick={() => this.addPlace()}
-            >
-              Sign Up or Login | Add to your Food Guide
-            </button>
-          </div>
-        )}
+      <div className="user-layout">
+        <h1>{this.props.username}</h1>
+        <Link className="userItem" to={`/user/${this.props._id}`}>
+          View Profile
+        </Link>
         {this.props.user && (
           <div>
             {this.state.showBtn && (
               <button
                 className="submit"
                 type="submit"
-                onClick={() => this.addPlace()}
+                onClick={() => this.addUser()}
               >
-                Add to my food guide
+                Add to my Food Guides
               </button>
             )}
             {!this.state.showBtn && (
               <button
                 className="submit"
                 type="submit"
-                onClick={() => this.removePlace()}
+                onClick={() => this.removeUser()}
               >
-                Remove from my food guide
+                Remove from my Food Guides
               </button>
             )}
           </div>
@@ -96,11 +83,4 @@ class Business extends Component {
   }
 }
 
-/*
-  user might already added this to db.
-  user.favourites = array of id's.
-
-
-*/
-
-export default Business;
+export default User;

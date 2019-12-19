@@ -1,9 +1,10 @@
 import React, { Route, Component, createRef } from "react";
 import UploadService from "../api/uploadService";
 import Map from "../components/Map";
-import Business from "../components/Business";
+import UserBusiness from "../components/UserBusiness";
 import { getMyPlaces } from "../api/yelp";
 import AuthService from "../api/authService";
+import UserService from "../api/users";
 import chefLogo from "../images/chef.png";
 
 export default class Profile extends Component {
@@ -14,10 +15,20 @@ export default class Profile extends Component {
       user: null
     };
     this.service = new AuthService();
+    this.userService = new UserService();
   }
 
   async componentDidMount() {
-    const user = await this.service.isLoggedIn();
+    debugger;
+    let user;
+    const id = this.props.match.params.id;
+    if (id) {
+      user = await this.userService.getUser(id);
+      debugger;
+    } else {
+      user = await this.service.isLoggedIn();
+      debugger;
+    }
 
     const allPlaces = user.places.map(async placeId => {
       try {
@@ -49,14 +60,9 @@ export default class Profile extends Component {
     if (!this.state.user) return <img className="loadingchef" src={chefLogo} />;
     return (
       <div>
-        <h1>Welcome {this.props.user.username}</h1>
+        <h1>{this.state.user.username}</h1>
         {this.state.places.map((id, i) => (
-          <Business
-            key={i}
-            {...id}
-            user={this.state.user}
-            removePlace={this.removePlace}
-          />
+          <UserBusiness key={i} {...id} />
         ))}
       </div>
     );

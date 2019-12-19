@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import addService from "../api/addService";
 import removeService from "../api/removeService";
 
-class Business extends Component {
+class UserBusiness extends Component {
   constructor(props) {
     super(props);
     let btn = true;
@@ -55,10 +55,9 @@ class Business extends Component {
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}
           {this.props.price} | {this.props.rating}
-          {this.props.city}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
-        {!this.props.user && (
+        {this.props.user && (
           <div>
             <button
               className="submit"
@@ -69,7 +68,7 @@ class Business extends Component {
             </button>
           </div>
         )}
-        {this.props.user && (
+        {!this.props.user && (
           <div>
             {this.state.showBtn && (
               <button
@@ -96,11 +95,4 @@ class Business extends Component {
   }
 }
 
-/*
-  user might already added this to db.
-  user.favourites = array of id's.
-
-
-*/
-
-export default Business;
+export default UserBusiness;

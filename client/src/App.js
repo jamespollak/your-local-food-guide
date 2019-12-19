@@ -13,6 +13,8 @@ import YelpService from "./api/yelp";
 import HigherOrder from "./pages/HigherOrder";
 import HomePage from "./pages/HomePage";
 import CityLandingPage from "./pages/CityLandingPage";
+import UsersPage from "./pages/UsersPage";
+import UserProfile from "./pages/UserProfile";
 
 export default class App extends Component {
   constructor() {
@@ -92,7 +94,12 @@ export default class App extends Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
-
+          <Route exact path="/users" component={UsersPage} />
+          <Route
+            exact
+            path="/user/:id"
+            render={props => <UserProfile {...props} user={this.state.user} />}
+          />
           <Route
             exact
             path="/city/:query"

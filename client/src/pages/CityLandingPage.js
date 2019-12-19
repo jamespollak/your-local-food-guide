@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getRestaurantsByQuery } from "../api/yelp";
 import Business from "../components/Business";
 import AuthService from "../api/authService";
+import chefLogo from "../images/chef.png";
 
 export default class CityLandingPage extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class CityLandingPage extends Component {
 
   render() {
     console.log(this.props.user);
+    if (!this.state.user) return <img className="loadingchef" src={chefLogo} />;
     return (
       <div>
         <h1>Discover {this.props.match.params.query}</h1>

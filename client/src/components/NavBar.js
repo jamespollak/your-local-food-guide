@@ -14,8 +14,8 @@ class NavBar extends Component {
           <Link className="navItem" to="/">
             Home
           </Link>
-          <Link className="navItem" to="/foodies">
-            Find Foodies
+          <Link className="navItem" to="/users">
+            Food Guides
           </Link>
           <Link className="navItem" to="/signup">
             Sign Up
@@ -32,8 +32,8 @@ class NavBar extends Component {
           <Link className="navItem" to="/">
             Home
           </Link>
-          <Link className="navItem" to="/foodies">
-            Find Foodies
+          <Link className="navItem" to="/users">
+            Food Guides
           </Link>
           <Link className="navItem" to="/profile">
             {this.props.user.username}

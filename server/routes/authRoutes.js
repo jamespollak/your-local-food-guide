@@ -10,7 +10,6 @@ router.post("/signup", async (req, res, next) => {
     res.status(400).json({ message: "Please provide your credentials" });
     return false;
   }
-
   try {
     //encrpt password
     const user = await User.create(req.body);
