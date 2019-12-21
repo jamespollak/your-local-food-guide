@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import addService from "../api/addService";
 import removeService from "../api/removeService";
 import { Link } from "react-router-dom";
+import chefLogo from "../images/chef.png";
 
 class User extends Component {
   constructor(props) {
@@ -53,6 +54,8 @@ class User extends Component {
     return (
       <div className="user-layout">
         <h1>{this.props.username}</h1>
+        <img src={chefLogo} />
+        <br></br>
         <Link className="userItem" to={`/user/${this.props._id}`}>
           View Profile
         </Link>

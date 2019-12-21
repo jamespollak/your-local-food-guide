@@ -48,7 +48,7 @@ export default class Login extends Component {
             placeholder="Your password"
           />
           <button className="submit" type="submit">
-            Login!
+            Login
           </button>
         </form>
         {this.state.err && <p className="error">{this.state.err}</p>}

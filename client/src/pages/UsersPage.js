@@ -19,8 +19,8 @@ export default class UsersPage extends Component {
   render() {
     console.log(this.state);
     return (
-      <div>
-        <h1>Local Food Guides</h1>
+      <div className="food-guides">
+        <h1>Food Guides</h1>
         {this.state.users.map((user, i) => (
           <User key={i} {...user} />
         ))}

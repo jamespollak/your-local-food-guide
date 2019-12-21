@@ -83,7 +83,7 @@ footer {
   align-items: center;
   justify-content: center;
   display: block;
-  margin: auto;
+  margin: 90px auto;
 }
 .signup p {
   margin: auto;
@@ -111,7 +111,7 @@ footer {
   width: 50%;
   justify-content: center;
   display: block;
-  margin: auto;
+  margin: 140px auto;
 }
 .login p {
   margin: auto;
@@ -148,7 +148,7 @@ footer {
   display: block;
   margin: 30px auto;
   box-sizing: border-box;
-  max-width: 80%;
+  width: 70%;
   outline: none;
   text-align: center;
   background-color: black;
@@ -192,6 +192,10 @@ footer {
   margin-top: 250px;
 }
 
+.search h2 {
+  font-weight: normal;
+}
+
 .search input[type="text"] {
   color: black;
   padding: 10px;
@@ -216,7 +220,7 @@ footer {
   display: inline-block;
   box-sizing: border-box;
   border: black;
-  margin: 10px;
+  margin: 30px;
   text-align: center;
   font-weight: lighter;
   box-shadow: 0 0 0.1em lightgray;
@@ -228,12 +232,13 @@ footer {
   position: relative;
   width: 200px;
   height: 200px;
-  overflow: hidden;
+  overflow: auto;
   object-fit: scale-down;
 }
 
-.business-title {
+.business-layout h2 {
   overflow-wrap: break-word;
+  line-break: strict;
 }
 
 .user-layout {
@@ -292,6 +297,10 @@ footer {
   box-sizing: border-box;
   margin: 0;
   padding: 10px;
+}
+
+.food-guides {
+  font-weight: normal;
 }
 
 @keyframes rotation {

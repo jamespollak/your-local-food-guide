@@ -52,7 +52,7 @@ class Business extends Component {
     if (!this.props.id) return null;
     return (
       <div className="business-layout">
-        <h2 className="business-title">{this.props.name}</h2>
+        <h2>{this.props.name}</h2>
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}
           {this.props.price} | {this.props.rating}

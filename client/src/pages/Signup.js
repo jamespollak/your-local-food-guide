@@ -22,7 +22,7 @@ export default class Signup extends Component {
     try {
       const user = await this.authService.signup(this.state);
       this.props.setUserState(user);
-      this.props.history.push("/profile");
+      this.props.history.push("/");
     } catch (err) {
       let message = err.message;
       if (err.response) message = err.response.data.message;
