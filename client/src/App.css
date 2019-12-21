@@ -1,6 +1,10 @@
 .App {
   text-align: center;
-  margin: 100px 0px;
+  /* margin: 48px 0px; */
+}
+
+main {
+  margin: 48px 0px;
 }
 
 .App-logo {
@@ -127,12 +131,37 @@ footer {
   text-align: center;
 }
 
+.submit-add {
+  padding: 15px;
+  display: block;
+  margin: 30px auto;
+  box-sizing: border-box;
+  max-width: 80%;
+  outline: none;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
 .submit {
   padding: 15px;
   display: block;
   margin: 30px auto;
   box-sizing: border-box;
-  width: 70%;
+  max-width: 80%;
+  outline: none;
+  text-align: center;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}
+
+.submit-remove {
+  padding: 15px;
+  display: block;
+  margin: 30px auto;
+  box-sizing: border-box;
+  max-width: 80%;
   outline: none;
   text-align: center;
   background-color: black;
@@ -148,6 +177,8 @@ footer {
   justify-content: center;
   display: block;
   margin: auto;
+
+  /* max-height: calc(100vh - 102px); */
 }
 
 .search {
@@ -158,6 +189,7 @@ footer {
   width: 100%;
   height: 100vh;
   position: relative;
+  margin-top: 250px;
 }
 
 .search input[type="text"] {
@@ -182,9 +214,14 @@ footer {
 
 .business-layout {
   display: inline-block;
-  border-style: solid;
+  box-sizing: border-box;
   border: black;
   margin: 10px;
+  text-align: center;
+  font-weight: lighter;
+  box-shadow: 0 0 0.1em lightgray;
+  border-radius: 0.5px;
+  padding: 10px;
 }
 
 .business-image {
@@ -195,8 +232,8 @@ footer {
   object-fit: scale-down;
 }
 
-.submit {
-  width: 180px;
+.business-title {
+  overflow-wrap: break-word;
 }
 
 .user-layout {
@@ -214,6 +251,47 @@ footer {
 .loadingchef {
   animation: rotation 1s infinite linear;
   width: 100px;
+  margin-top: 250px;
+}
+
+.chef-map {
+  width: 30px;
+}
+
+.map {
+  width: 50%;
+  max-height: calc(100vh - 204px);
+}
+
+.restaurants {
+  width: 50%;
+}
+
+.profile {
+  display: flex;
+  align-items: flex-start;
+
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.profile h1 {
+  width: 100%;
+}
+
+.profile .restaurants {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: calc(100vh - 94px);
+
+  overflow-y: scroll;
+}
+
+.profile .restaurants .business-layout {
+  width: 50%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
 }
 
 @keyframes rotation {

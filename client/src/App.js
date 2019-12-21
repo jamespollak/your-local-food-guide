@@ -91,42 +91,45 @@ export default class App extends Component {
     return (
       <div className="App">
         <NavBar user={this.state.user} logout={this.logout} />
+        <main>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/users" component={UsersPage} />
+            <Route
+              exact
+              path="/user/:id"
+              render={props => (
+                <UserProfile {...props} user={this.state.user} />
+              )}
+            />
+            <Route
+              exact
+              path="/city/:query"
+              render={props => (
+                <CityLandingPage {...props} user={this.state.user} />
+              )}
+            />
 
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/users" component={UsersPage} />
-          <Route
-            exact
-            path="/user/:id"
-            render={props => <UserProfile {...props} user={this.state.user} />}
-          />
-          <Route
-            exact
-            path="/city/:query"
-            render={props => (
-              <CityLandingPage {...props} user={this.state.user} />
-            )}
-          />
-
-          <Route
-            path="/login"
-            render={props => (
-              <Login {...props} setUserState={this.setUserState} />
-            )}
-          />
-          <Route
-            path="/signup"
-            render={props => (
-              <Signup {...props} setUserState={this.setUserState} />
-            )}
-          />
-          <PrivateRoute
-            path="/profile"
-            user={this.state.user}
-            setUserState={this.setUserState}
-            component={Profile}
-          />
-        </Switch>
+            <Route
+              path="/login"
+              render={props => (
+                <Login {...props} setUserState={this.setUserState} />
+              )}
+            />
+            <Route
+              path="/signup"
+              render={props => (
+                <Signup {...props} setUserState={this.setUserState} />
+              )}
+            />
+            <PrivateRoute
+              path="/profile"
+              user={this.state.user}
+              setUserState={this.setUserState}
+              component={Profile}
+            />
+          </Switch>
+        </main>
         <Footer />
       </div>
     );

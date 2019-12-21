@@ -10,7 +10,8 @@ export default class CityLandingPage extends Component {
     this.state = {
       businesses: [],
       amount: 50,
-      user: null
+      user: null,
+      isLoading: true
     };
     this.service = new AuthService();
   }
@@ -25,7 +26,11 @@ export default class CityLandingPage extends Component {
 
     getRestaurantsByQuery(this.props.match.params.query, this.state.amount)
       .then(res => {
-        this.setState({ businesses: res.data.businesses, user });
+        this.setState({
+          businesses: res.data.businesses,
+          user,
+          isLoading: false
+        });
       })
       .catch(error => {
         console.error(error);
@@ -33,11 +38,13 @@ export default class CityLandingPage extends Component {
   }
 
   render() {
-    console.log(this.props.user);
-    if (!this.state.user) return <img className="loadingchef" src={chefLogo} />;
+    const name = this.props.match.params.query;
+    const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
+    if (this.state.isLoading)
+      return <img className="loadingchef" src={chefLogo} />;
     return (
       <div>
-        <h1>Discover {this.props.match.params.query}</h1>
+        <h1>Discover {nameCapitalized}</h1>
         {this.state.businesses.map((restaurant, i) => (
           <Business key={i} {...restaurant} user={this.state.user} />
         ))}

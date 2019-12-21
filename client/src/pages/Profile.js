@@ -46,18 +46,34 @@ export default class Profile extends Component {
   };
 
   render() {
+    const places = this.state.places
+      ? this.state.places.map(place => {
+          return {
+            coordinates: place.coordinates,
+            name: place.name,
+            image: place.image_url
+          };
+        })
+      : [];
+    console.log(this.places);
     if (!this.state.user) return <img className="loadingchef" src={chefLogo} />;
     return (
-      <div>
-        <h1>Welcome {this.props.user.username}</h1>
-        {this.state.places.map((id, i) => (
-          <Business
-            key={i}
-            {...id}
-            user={this.state.user}
-            removePlace={this.removePlace}
-          />
-        ))}
+      <div className="profile">
+        <div className="map">
+          {" "}
+          <Map places={places}></Map>
+        </div>
+        <div className="restaurants">
+          {" "}
+          {this.state.places.map((id, i) => (
+            <Business
+              key={i}
+              {...id}
+              user={this.state.user}
+              removePlace={this.removePlace}
+            />
+          ))}
+        </div>
       </div>
     );
   }

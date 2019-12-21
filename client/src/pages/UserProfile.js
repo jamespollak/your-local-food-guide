@@ -19,15 +19,12 @@ export default class Profile extends Component {
   }
 
   async componentDidMount() {
-    debugger;
     let user;
     const id = this.props.match.params.id;
     if (id) {
       user = await this.userService.getUser(id);
-      debugger;
     } else {
       user = await this.service.isLoggedIn();
-      debugger;
     }
 
     const allPlaces = user.places.map(async placeId => {
@@ -57,14 +54,37 @@ export default class Profile extends Component {
   };
 
   render() {
+    const places = this.state.places
+      ? this.state.places.map(place => {
+          return {
+            coordinates: place.coordinates,
+            name: place.name,
+            image: place.image_url
+          };
+        })
+      : [];
+    console.log(this.places);
     if (!this.state.user) return <img className="loadingchef" src={chefLogo} />;
     return (
-      <div>
-        <h1>{this.state.user.username}</h1>
-        {this.state.places.map((id, i) => (
-          <UserBusiness key={i} {...id} />
-        ))}
-      </div>
+      //   <div>
+      //     <h1>{this.state.user.username}</h1>
+      //     {this.state.places.map((id, i) => (
+      //       <UserBusiness key={i} {...id} />
+      //     ))}
+      //   </div>
+      <>
+        <div className="profile">
+          <div className="map">
+            <Map places={places}></Map>
+          </div>
+          <div className="restaurants">
+            <h1>{this.state.user.username}</h1>
+            {this.state.places.map((id, i) => (
+              <UserBusiness key={i} {...id} />
+            ))}
+          </div>
+        </div>
+      </>
     );
   }
 }

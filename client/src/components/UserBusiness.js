@@ -72,7 +72,7 @@ class UserBusiness extends Component {
           <div>
             {this.state.showBtn && (
               <button
-                className="submit"
+                className="submit-add"
                 type="submit"
                 onClick={() => this.addPlace()}
               >
@@ -81,7 +81,7 @@ class UserBusiness extends Component {
             )}
             {!this.state.showBtn && (
               <button
-                className="submit"
+                className="submit-remove"
                 type="submit"
                 onClick={() => this.removePlace()}
               >

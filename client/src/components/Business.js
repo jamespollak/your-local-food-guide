@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import addService from "../api/addService";
 import removeService from "../api/removeService";
+import { Link } from "react-router-dom";
 
 class Business extends Component {
   constructor(props) {
@@ -51,11 +52,10 @@ class Business extends Component {
     if (!this.props.id) return null;
     return (
       <div className="business-layout">
-        <h2>{this.props.name}</h2>
+        <h2 className="business-title">{this.props.name}</h2>
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}
           {this.props.price} | {this.props.rating}
-          {this.props.city}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
         {!this.props.user && (
@@ -63,7 +63,7 @@ class Business extends Component {
             <button
               className="submit"
               type="submit"
-              onClick={() => this.addPlace()}
+              onClick="window.location.href = '/signup';"
             >
               Sign Up or Login | Add to your Food Guide
             </button>
@@ -73,20 +73,20 @@ class Business extends Component {
           <div>
             {this.state.showBtn && (
               <button
-                className="submit"
+                className="submit-add"
                 type="submit"
                 onClick={() => this.addPlace()}
               >
-                Add to my food guide
+                Add to my Food Guide
               </button>
             )}
             {!this.state.showBtn && (
               <button
-                className="submit"
+                className="submit-remove"
                 type="submit"
                 onClick={() => this.removePlace()}
               >
-                Remove from my food guide
+                Remove from my Food Guide
               </button>
             )}
           </div>
