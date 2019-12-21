@@ -11,8 +11,6 @@ class Map extends Component {
     if (props.places.length > 0) {
       latitude = props.places[0].coordinates.latitude;
       longitude = props.places[0].coordinates.longitude;
-
-      console.log(latitude, longitude);
     }
 
     this.state = {
@@ -24,6 +22,22 @@ class Map extends Component {
         zoom: 11
       }
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.mapView.latitude !== this.props.mapView.latitude &&
+      prevProps.mapView.longitude !== this.props.mapView.longitude
+    ) {
+      debugger;
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          latitude: this.props.mapView.latitude,
+          longitude: this.props.mapView.longitude
+        }
+      });
+    }
   }
 
   renderMarkers = () => {

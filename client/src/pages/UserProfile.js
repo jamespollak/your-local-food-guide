@@ -7,12 +7,16 @@ import AuthService from "../api/authService";
 import UserService from "../api/users";
 import chefLogo from "../images/chef.png";
 
-export default class Profile extends Component {
+export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       places: [],
-      user: null
+      user: null,
+      mapView: {
+        latitude: null,
+        longitude: null
+      }
     };
     this.service = new AuthService();
     this.userService = new UserService();
@@ -53,6 +57,10 @@ export default class Profile extends Component {
     this.setState({ places });
   };
 
+  locationMapHandler = location => {
+    this.setState({ mapView: location });
+  };
+
   render() {
     const places = this.state.places
       ? this.state.places.map(place => {
@@ -63,7 +71,7 @@ export default class Profile extends Component {
           };
         })
       : [];
-    console.log(this.places);
+    console.log("IS loggedIN?", this.props.user);
     if (!this.state.user) return <img className="loadingchef" src={chefLogo} />;
     return (
       //   <div>
@@ -75,12 +83,17 @@ export default class Profile extends Component {
       <>
         <div className="profile">
           <div className="map">
-            <Map places={places}></Map>
+            <Map places={places} mapView={this.state.mapView}></Map>
           </div>
           <div className="restaurants">
             <h1>{this.state.user.username}</h1>
             {this.state.places.map((id, i) => (
-              <UserBusiness key={i} {...id} />
+              <UserBusiness
+                locationMapHandler={this.locationMapHandler}
+                user={this.props.user}
+                key={i}
+                {...id}
+              />
             ))}
           </div>
         </div>

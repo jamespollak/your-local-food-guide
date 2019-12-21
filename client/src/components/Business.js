@@ -49,9 +49,13 @@ class Business extends Component {
     this.props.user.placesIds.includes(this.props.id) then do stuff
   */
   render() {
+    console.log(this.props);
     if (!this.props.id) return null;
     return (
-      <div className="business-layout">
+      <div
+        className="business-layout"
+        onClick={() => this.props.locationMapHandler(this.props.coordinates)}
+      >
         <h2>{this.props.name}</h2>
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}

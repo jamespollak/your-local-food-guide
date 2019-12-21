@@ -50,14 +50,17 @@ class UserBusiness extends Component {
   render() {
     if (!this.props.id) return null;
     return (
-      <div className="business-layout">
+      <div
+        className="business-layout"
+        onClick={() => this.props.locationMapHandler(this.props.coordinates)}
+      >
         <h2>{this.props.name}</h2>
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}
           {this.props.price} | {this.props.rating}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
-        {this.props.user && (
+        {!this.props.user && (
           <div>
             <button
               className="submit"
@@ -68,7 +71,7 @@ class UserBusiness extends Component {
             </button>
           </div>
         )}
-        {!this.props.user && (
+        {this.props.user && (
           <div>
             {this.state.showBtn && (
               <button

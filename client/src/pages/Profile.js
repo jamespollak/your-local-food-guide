@@ -11,7 +11,11 @@ export default class Profile extends Component {
     super(props);
     this.state = {
       places: [],
-      user: null
+      user: null,
+      mapView: {
+        latitude: null,
+        longitude: null
+      }
     };
     this.service = new AuthService();
   }
@@ -45,7 +49,12 @@ export default class Profile extends Component {
     this.setState({ places });
   };
 
+  locationMapHandler = location => {
+    this.setState({ mapView: location });
+  };
+
   render() {
+    console.log(this.state);
     const places = this.state.places
       ? this.state.places.map(place => {
           return {
@@ -61,14 +70,15 @@ export default class Profile extends Component {
       <div className="profile">
         <div className="map">
           {" "}
-          <Map places={places}></Map>
+          <Map places={places} mapView={this.state.mapView}></Map>
         </div>
         <div className="restaurants">
           {" "}
-          {this.state.places.map((id, i) => (
+          {this.state.places.map((place, i) => (
             <Business
-              key={i}
-              {...id}
+              locationMapHandler={this.locationMapHandler}
+              key={place.id}
+              {...place}
               user={this.state.user}
               removePlace={this.removePlace}
             />
