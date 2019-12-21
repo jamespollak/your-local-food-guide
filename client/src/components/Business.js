@@ -59,7 +59,7 @@ class Business extends Component {
         <h2>{this.props.name}</h2>
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}
-          {this.props.price} | {this.props.rating}
+          {this.props.price} | {this.props.rating} | {this.props.location.city}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
         {!this.props.user && (
@@ -79,7 +79,10 @@ class Business extends Component {
               <button
                 className="submit-add"
                 type="submit"
-                onClick={() => this.addPlace()}
+                onClick={e => {
+                  e.stopPropagation();
+                  this.addPlace();
+                }}
               >
                 Add to my Food Guide
               </button>
@@ -88,7 +91,10 @@ class Business extends Component {
               <button
                 className="submit-remove"
                 type="submit"
-                onClick={() => this.removePlace()}
+                onClick={e => {
+                  e.stopPropagation();
+                  this.removePlace();
+                }}
               >
                 Remove from my Food Guide
               </button>

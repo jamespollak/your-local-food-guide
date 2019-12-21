@@ -57,7 +57,7 @@ class UserBusiness extends Component {
         <h2>{this.props.name}</h2>
         <h4>
           {this.props.categories && this.props.categories[0].title} |{" "}
-          {this.props.price} | {this.props.rating}
+          {this.props.price} | {this.props.rating} | {this.props.location.city}
         </h4>
         <img className="business-image" src={this.props.image_url} alt="" />
         {!this.props.user && (
@@ -65,7 +65,10 @@ class UserBusiness extends Component {
             <button
               className="submit"
               type="submit"
-              onClick={() => this.addPlace()}
+              onClick={e => {
+                e.stopPropagation();
+                this.addPlace();
+              }}
             >
               Sign Up or Login | Add to your Food Guide
             </button>
@@ -86,7 +89,10 @@ class UserBusiness extends Component {
               <button
                 className="submit-remove"
                 type="submit"
-                onClick={() => this.removePlace()}
+                onClick={e => {
+                  e.stopPropagation();
+                  this.removePlace();
+                }}
               >
                 Remove from my food guide
               </button>
